@@ -36,7 +36,7 @@ def tixing():
     rmb = huobi*usdt
     print(usdt)
     con = "火币ETH当前价格：%sUSDT,约为%sRMB" % (huobi, rmb)
-    userInfoStr = """[{"email": "liu.yanpei@qq.com","rmblow": 1000,"rmbhigh": 0,"usdtlow": 0,"usdthigt": 1300}"""
+    userInfoStr = """[{"email": "liu.yanpei@qq.com","rmblow": 1000,"rmbhigh": 0,"usdtlow": 0,"usdthigt": 1300}]"""
     userInfo = json.loads(userInfoStr)
     for user in userInfo:
         email = user["email"]
