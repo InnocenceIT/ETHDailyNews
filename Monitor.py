@@ -35,8 +35,8 @@ def tixing():
     huobi = getbuy("HUOBI", dataarr)
     rmb = huobi*usdt
     print(usdt)
-    con = "»ğ±ÒETHµ±Ç°¼Û¸ñ£º%sUSDT,Ô¼Îª%sRMB" % (huobi, rmb)
-    userInfoStr = """[{"email": "825639602@qq.com","rmblow": 1000,"rmbhigh": 0,"usdtlow": 0,"usdthigt": 1300}]"""
+    con = "ç«å¸ETHå½“å‰ä»·æ ¼ï¼š%sUSDT,çº¦ä¸º%sRMB" % (huobi, rmb)
+    userInfoStr = """[{"email": "liu.yanpei@qq.com","rmblow": 1000,"rmbhigh": 0,"usdtlow": 0,"usdthigt": 1300},{"email": "liu.yanpei@aishu.cn","rmblow": 1000,"rmbhigh": 0,"usdtlow": 0,"usdthigt": 1300}]"""
     userInfo = json.loads(userInfoStr)
     for user in userInfo:
         email = user["email"]
@@ -45,20 +45,20 @@ def tixing():
         usdtlow = user["usdtlow"]
         usdthigt = user["usdthigt"]
         if rmbhigh != 0 and rmb > rmbhigh:
-            s = "<p><div style='color:#F00'>ETHµ±Ç°¼Û¸ñÒÑ¾­³¬¹ı%sRMB,Çë×¢ÒâÍ¶×Ê·çÏÕ</div></p>" % rmbhigh
+            s = "<p><div style='color:#F00'>ETHå½“å‰ä»·æ ¼å·²ç»è¶…è¿‡%sRMB,è¯·æ³¨æ„æŠ•èµ„é£é™©</div></p>" % rmbhigh
             con = "%s%s" % (con, s)
         if rmblow != 0 and rmb < rmblow:
-            s = "<p><div style='color:#00F'>ETHµ±Ç°¼Û¸ñÒÑ¾­µÍÓÚ%sRMB,Çë×¢ÒâÍ¶×Ê·çÏÕ</div></p>" % rmblow
+            s = "<p><div style='color:#00F'>ETHå½“å‰ä»·æ ¼å·²ç»ä½äº%sRMB,è¯·æ³¨æ„æŠ•èµ„é£é™©</div></p>" % rmblow
             con = "%s%s" % (con, s)
         if usdthigt != 0 and huobi > usdthigt:
-            s = "<p><div style='color:#F00'>ETHµ±Ç°¼Û¸ñÒÑ¾­³¬¹ı%sUSDT,Çë×¢ÒâÍ¶×Ê·çÏÕ</div></p>" % usdthigt
+            s = "<p><div style='color:#F00'>ETHå½“å‰ä»·æ ¼å·²ç»è¶…è¿‡%sUSDT,è¯·æ³¨æ„æŠ•èµ„é£é™©</div></p>" % usdthigt
             con = "%s%s" % (con, s)
         if usdtlow != 0 and huobi < usdtlow:
-            s = "<p><div style='color:#00F'>ETHµ±Ç°¼Û¸ñÒÑ¾­µÍÓÚ%sUSDT,Çë×¢ÒâÍ¶×Ê·çÏÕ</div></p>" % usdtlow
+            s = "<p><div style='color:#00F'>ETHå½“å‰ä»·æ ¼å·²ç»ä½äº%sUSDT,è¯·æ³¨æ„æŠ•èµ„é£é™©</div></p>" % usdtlow
             con = "%s%s" % (con, s)
         print(con)
         content = "<span>%s</span>" % con
-        EmailUtil.sendEmail(email, "ETH¼Û¸ñÌáĞÑ", content)
+        EmailUtil.sendEmail(email, "ETHä»·æ ¼æé†’", content)
 
 
 tixing()
