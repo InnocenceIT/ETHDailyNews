@@ -41,9 +41,14 @@ def getbuy(key: str, dataarr: list):
 def getValue(s:str, key:str):
     arr = s.split(",")
     for temp in arr:
+        print(temp)
         temparr = temp.split(":")
         tempkey = temparr[0]
-        tempvalue = temparr[0]
+        tempvalue = temparr[1]
+        print(temp)
+        print(tempkey)
+        print(tempvalue)
+        print("-----------------")
         if key == tempkey:
             return tempvalue
     return ""
