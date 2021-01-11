@@ -65,10 +65,10 @@ def tixing(argv):
 
         email = getValue(user, "email")
         send = getValue(user, "send")
-        rmblow = getValue(user, "rmblow")
-        rmbhigh = getValue(user, "rmbhigh")
-        usdtlow = getValue(user, "usdtlow")
-        usdthigt = getValue(user, "usdthigt")
+        rmblow = float(getValue(user, "rmblow"))
+        rmbhigh = float(getValue(user, "rmbhigh"))
+        usdtlow = float(getValue(user, "usdtlow"))
+        usdthigt = float(getValue(user, "usdthigt"))
         if rmbhigh != 0 and rmb > rmbhigh:
             s = "<p><div style='color:#F00'>ETH当前价格已经超过%sRMB,请注意投资风险</div></p>" % rmbhigh
             con = "%s%s" % (con, s)
