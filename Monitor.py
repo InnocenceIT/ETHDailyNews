@@ -40,7 +40,7 @@ def getbuy(key: str, dataarr: list):
     return 0
 
 
-def tixing():
+def tixing(argv):
     dataarr = getJson()
 
     # keys=["BTER", "ZB", "MXC", "BITFINEX", "OKCOIN", "HUOBI", "BINANCE"]
@@ -49,7 +49,7 @@ def tixing():
     rmb = huobi*usdt
     print(usdt)
     con = "火币ETH当前价格：%sUSDT,约为%sRMB" % (huobi, rmb)
-    userInfoStr = sys.argv[0]
+    userInfoStr = argv[0]
     userInfo = json.loads(userInfoStr)
     for user in userInfo:
         email = user["email"]
