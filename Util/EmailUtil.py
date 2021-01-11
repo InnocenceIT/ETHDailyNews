@@ -4,16 +4,13 @@ import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
 
-from_addr = '1284502966@qq.com'  # 邮件发送账号
-qqCode = 'ryxdcvszyjrobadj'  # 授权码（这个要填自己获取到的）
 smtp_server = 'smtp.qq.com'  # 固定写死
 smtp_port = 465  # 固定端口
-# to_addrs = 'bnsppy@163.com'  # 接收邮件账号
 
 
 class EmailUtil:
     @classmethod
-    def sendEmail(cls, email: str, title: str, content: str):
+    def sendEmail(cls, email: str, title: str, content: str, from_addr:str, qqCode:str ):
         # 配置服务器
         stmp = smtplib.SMTP_SSL(smtp_server, smtp_port)
         stmp.login(from_addr, qqCode)

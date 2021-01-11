@@ -47,6 +47,8 @@ def tixing(argv):
     rmb = huobi*usdt
     con = "火币ETH当前价格：%sUSDT,约为%sRMB" % (huobi, rmb)
     userInfoStr = argv[1]
+    from_addr = argv[2]  # 邮件发送账号
+    qqCode = argv[3]  # 授权码（这个要填自己获取到的）
     userInfo = userInfoStr.split("|")
     for user in userInfo:
         email = getValue(user, "email")
@@ -73,7 +75,7 @@ def tixing(argv):
         if (len(email) > 0):
             EmailUtil.sendEmail(email, title, content)
         if(len(send) > 0):
-            reTest = wxPush(title, content, send)
+            reTest = wxPush(title, content, send, from_addr, qqCode)
             print(reTest)
 
 

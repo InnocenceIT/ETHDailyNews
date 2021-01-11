@@ -39,5 +39,7 @@ jobs:
     - name: Run
       env:
         userInfo: ${{secrets.userInfo}}
+        fromAddr: ${{secrets.fromAddr}}
+        qqCode: ${{secrets.qqCode}}
       run: |
-        python Monitor.py ${userInfo}
+        python Monitor.py ${userInfo} ${fromAddr} ${qqCode}
