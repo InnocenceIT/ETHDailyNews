@@ -33,8 +33,6 @@ def wxPush(text:str, desp:str, send:str):
 
 def getbuy(key: str, dataarr: list):
     for data in dataarr:
-        print(data["from"])
-        print(key)
         if data["from"] == key:
             return data["buy"]
     return 0
@@ -50,6 +48,7 @@ def tixing(argv):
     print(usdt)
     con = "火币ETH当前价格：%sUSDT,约为%sRMB" % (huobi, rmb)
     userInfoStr = argv[0]
+    print(userInfoStr)
     userInfo = json.loads(userInfoStr)
     for user in userInfo:
         email = user["email"]
