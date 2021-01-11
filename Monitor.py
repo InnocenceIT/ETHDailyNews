@@ -45,7 +45,6 @@ def getValue(s:str, key:str):
         temparr = temp.split(":")
         tempkey = temparr[0]
         tempvalue = temparr[1]
-        print(temp)
         print(tempkey)
         print(tempvalue)
         print("-----------------")
@@ -63,7 +62,8 @@ def tixing(argv):
     rmb = huobi*usdt
     print(usdt)
     con = "火币ETH当前价格：%sUSDT,约为%sRMB" % (huobi, rmb)
-    userInfoStr = argv[0]
+    print(argv)
+    userInfoStr = argv[1]
     print(userInfoStr)
     userInfo = userInfoStr.split("|")
     for user in userInfo:
