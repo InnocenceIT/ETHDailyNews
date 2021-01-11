@@ -28,8 +28,7 @@ def wxPush(text:str, desp:str, send:str):
     url = "http://sc.ftqq.com/%s.send?text=%s&desp=%s" % (send, text, desp)
     response = requests.get(url, headers=headers)
     response.encoding = response.apparent_encoding
-    data = json.loads(response.text)
-    return data
+    return response.text
 
 def getbuy(key: str, dataarr: list):
     for data in dataarr:
@@ -41,13 +40,9 @@ def getbuy(key: str, dataarr: list):
 def getValue(s:str, key:str):
     arr = s.split(",")
     for temp in arr:
-        print(temp)
         temparr = temp.split(":")
         tempkey = temparr[0]
         tempvalue = temparr[1]
-        print(tempkey)
-        print(tempvalue)
-        print("-----------------")
         if key == tempkey:
             return tempvalue
     return ""
@@ -60,14 +55,10 @@ def tixing(argv):
     usdt = getbuy("USDT", dataarr)
     huobi = getbuy("HUOBI", dataarr)
     rmb = huobi*usdt
-    print(usdt)
     con = "火币ETH当前价格：%sUSDT,约为%sRMB" % (huobi, rmb)
-    print(argv)
     userInfoStr = argv[1]
-    print(userInfoStr)
     userInfo = userInfoStr.split("|")
     for user in userInfo:
-
         email = getValue(user, "email")
         send = getValue(user, "send")
         rmblow = float(getValue(user, "rmblow"))
@@ -92,7 +83,8 @@ def tixing(argv):
         if (len(email) > 0):
             EmailUtil.sendEmail(email, title, content)
         if(len(send) > 0):
-            wxPush(title, content, send)
+            reTest = wxPush(title, content, send)
+            print(reTest)
 
 
 tixing(sys.argv)
