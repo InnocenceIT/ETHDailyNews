@@ -73,9 +73,9 @@ def tixing(argv):
         content = "<span>%s</span>" % con
         title = "ETH¼Û¸ñÌáÐÑ"
         if (len(email) > 0):
-            EmailUtil.sendEmail(email, title, content)
+            EmailUtil.sendEmail(email, title, content, from_addr, qqCode)
         if(len(send) > 0):
-            reTest = wxPush(title, content, send, from_addr, qqCode)
+            reTest = wxPush(title, content, send)
             print(reTest)
 
 
