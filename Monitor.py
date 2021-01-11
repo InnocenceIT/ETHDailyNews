@@ -25,7 +25,8 @@ def wxPush(text:str, desp:str, send:str):
         "Host": "www.xicidaili.com",
         "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Mobile Safari/537.36"
     }
-    url = "http://sc.ftqq.com/%s.send?text=%s&desp=%s" % (send, text, desp)
+    url = "https://sc.ftqq.com/%s.send?text=%s&desp=%s" % (send, text, desp)
+    print(url)
     response = requests.get(url, headers=headers)
     response.encoding = response.apparent_encoding
     return response.text
