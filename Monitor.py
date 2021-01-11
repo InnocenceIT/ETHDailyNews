@@ -71,7 +71,7 @@ def tixing(argv):
             con = "%s%s" % (con, s)
         print(con)
         content = "<span>%s</span>" % con
-        title = "ETH价格提醒"
+        title = "ETH当前价格%sUSDT(￥%.2f)" % (huobi, rmb)
         if (len(email) > 0):
             EmailUtil.sendEmail(email, title, content, from_addr, qqCode)
         if(len(send) > 0):
