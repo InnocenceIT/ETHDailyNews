@@ -38,6 +38,17 @@ def getbuy(key: str, dataarr: list):
     return 0
 
 
+def getValue(s:str, key:str):
+    arr = s.split(",")
+    for temp in arr:
+        temparr = temp.split(":")
+        tempkey = temparr[0]
+        tempvalue = temparr[0]
+        if key == tempkey:
+            return tempvalue
+    return ""
+
+
 def tixing(argv):
     dataarr = getJson()
 
@@ -49,14 +60,15 @@ def tixing(argv):
     con = "火币ETH当前价格：%sUSDT,约为%sRMB" % (huobi, rmb)
     userInfoStr = argv[0]
     print(userInfoStr)
-    userInfo = json.loads(userInfoStr)
+    userInfo = userInfoStr.split("|")
     for user in userInfo:
-        email = user["email"]
-        send = user["send"]
-        rmblow = user["rmblow"]
-        rmbhigh = user["rmbhigh"]
-        usdtlow = user["usdtlow"]
-        usdthigt = user["usdthigt"]
+
+        email = getValue(user, "email")
+        send = getValue(user, "send")
+        rmblow = getValue(user, "rmblow")
+        rmbhigh = getValue(user, "rmbhigh")
+        usdtlow = getValue(user, "usdtlow")
+        usdthigt = getValue(user, "usdthigt")
         if rmbhigh != 0 and rmb > rmbhigh:
             s = "<p><div style='color:#F00'>ETH当前价格已经超过%sRMB,请注意投资风险</div></p>" % rmbhigh
             con = "%s%s" % (con, s)
@@ -72,8 +84,10 @@ def tixing(argv):
         print(con)
         content = "<span>%s</span>" % con
         title = "ETH价格提醒"
-        EmailUtil.sendEmail(email, title, content)
-        wxPush(title, content, send)
+        if (len(email) > 0):
+            EmailUtil.sendEmail(email, title, content)
+        if(len(send) > 0):
+            wxPush(title, content, send)
 
 
 tixing(sys.argv)
