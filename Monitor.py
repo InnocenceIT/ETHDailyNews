@@ -6,30 +6,17 @@ import sys
 
 
 def getJson():
-    headers = {
-        "Cookie": "_free_proxy_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJThmYjJhNTAyNzU0NDZiNDE0ZThhMTE1MDQ3MGNhOTg2BjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlDM1ozblgrdDl2TEZuWHZlano5NjJRdno4TjlaV0c1eXhOSXZ1Vnl1aWM9BjsARg%3D%3D--9b02012af1e6535418e69003d1300a82fc99a6e5; Hm_lvt_0cf76c77469e965d2957f0553e6ecf59=1564276936,1564796034,1564796040; Hm_lpvt_0cf76c77469e965d2957f0553e6ecf59=1564796172",
-        "If-None-Match": "W/\"9ed3b7f16675401490c68729be9cb96c\"",
-        "Host": "www.xicidaili.com",
-        "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Mobile Safari/537.36"
-    }
     url = "https://api.btc126.com/eth.php"
-    response = requests.get(url, headers=headers)
+    response = requests.get(url)
     response.encoding = response.apparent_encoding
     dataarr = json.loads(response.text)
     return dataarr
 
 def wxPush(text:str, desp:str, send:str):
-    headers = {
-        "Cookie": "_free_proxy_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiJThmYjJhNTAyNzU0NDZiNDE0ZThhMTE1MDQ3MGNhOTg2BjsAVEkiEF9jc3JmX3Rva2VuBjsARkkiMVlDM1ozblgrdDl2TEZuWHZlano5NjJRdno4TjlaV0c1eXhOSXZ1Vnl1aWM9BjsARg%3D%3D--9b02012af1e6535418e69003d1300a82fc99a6e5; Hm_lvt_0cf76c77469e965d2957f0553e6ecf59=1564276936,1564796034,1564796040; Hm_lpvt_0cf76c77469e965d2957f0553e6ecf59=1564796172",
-        "If-None-Match": "W/\"9ed3b7f16675401490c68729be9cb96c\"",
-        "Host": "www.xicidaili.com",
-        "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Mobile Safari/537.36"
-    }
     url = "https://sc.ftqq.com/%s.send" % send
     data = {"text":text , "desp":desp}
     print(url)
-    response = requests.post(url, data, headers=headers)
-    print(response.text)
+    response = requests.post(url, data)
     response.encoding = response.apparent_encoding
     return response.text
 
