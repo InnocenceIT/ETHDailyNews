@@ -12,7 +12,8 @@ def getJson():
     dataarr = json.loads(response.text)
     return dataarr
 
-def wxPush(text:str, desp:str, send:str):
+
+def wxPush(text: str, desp: str, send: str):
     url = "https://sc.ftqq.com/%s.send" % send
     data = {"text":text , "desp":desp}
     print(url)
@@ -20,14 +21,15 @@ def wxPush(text:str, desp:str, send:str):
     response.encoding = response.apparent_encoding
     return response.text
 
-def getbuy(key: str, dataarr: list):
-    for data in dataarr:
+
+def getBuy(key: str, dataArr: list):
+    for data in dataArr:
         if data["from"] == key:
             return data["buy"]
     return 0
 
 
-def getValue(s:str, key:str):
+def getValue(s: str, key: str):
     arr = s.split(",")
     for temp in arr:
         temparr = temp.split(":")
@@ -39,13 +41,13 @@ def getValue(s:str, key:str):
 
 
 def tixing(argv):
-    dataarr = getJson()
+    dataArr = getJson()
 
     # keys=["BTER", "ZB", "MXC", "BITFINEX", "OKCOIN", "HUOBI", "BINANCE"]
-    usdt = getbuy("USDT", dataarr)
-    huobi = getbuy("HUOBI", dataarr)
-    rmb = huobi*usdt
-    con = "火币ETH当前价格：%sUSDT,约为%sRMB" % (huobi, rmb)
+    usdt = getBuy("USDT", dataArr)
+    huoBi = getBuy("HUOBI", dataArr)
+    rmb = huoBi*usdt
+    con = "火币ETH当前价格：%sUSDT,约为%sRMB" % (huoBi, rmb)
     userInfoStr = argv[1]
     from_addr = argv[2]  # 邮件发送账号
     qqCode = argv[3]  # 授权码（这个要填自己获取到的）
@@ -63,18 +65,18 @@ def tixing(argv):
         if rmblow != 0 and rmb < rmblow:
             s = "<p><div style='color:#00F'>ETH当前价格已经低于%sRMB,请注意投资风险</div></p>" % rmblow
             con = "%s%s" % (con, s)
-        if usdthigt != 0 and huobi > usdthigt:
+        if usdthigt != 0 and huoBi > usdthigt:
             s = "<p><div style='color:#F00'>ETH当前价格已经超过%sUSDT,请注意投资风险</div></p>" % usdthigt
             con = "%s%s" % (con, s)
-        if usdtlow != 0 and huobi < usdtlow:
+        if usdtlow != 0 and huoBi < usdtlow:
             s = "<p><div style='color:#00F'>ETH当前价格已经低于%sUSDT,请注意投资风险</div></p>" % usdtlow
             con = "%s%s" % (con, s)
         print(con)
         content = "<span>%s</span>" % con
-        title = "ETH当前价格%sUSDT(￥%.2f)" % (huobi, rmb)
-        if (len(email) > 0):
+        title = "ETH当前价格%sUSDT(￥%.2f)" % (huoBi, rmb)
+        if len(email) > 0:
             EmailUtil.sendEmail(email, title, content, from_addr, qqCode)
-        if(len(send) > 0):
+        if len(send) > 0:
             reTest = wxPush(title, content, send)
             print(reTest)
 
