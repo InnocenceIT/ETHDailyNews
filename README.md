@@ -1,9 +1,12 @@
 # ETHDailyNews
+ 定时获取当前ETH价格并通过邮件、微信发送提醒
 ## 设置
   **进入Settings-> Secrets-> New Secrets 添加以下3个Secrets。它们将作为应用启动时的命令行参数被传入程序。** 
  
  FROMADDR   发送邮箱（暂时只能QQ邮箱）
+ 
  QQCODE     授权码（QQ邮箱获取）
+ 
  USERINFO   用户信息格式如下
  
  ### USERINFO
