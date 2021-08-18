@@ -1,4 +1,4 @@
-# coding=gb2312
+# coding=utf-8
 import requests
 import json
 from Util.EmailUtil import EmailUtil
