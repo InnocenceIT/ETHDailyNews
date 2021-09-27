@@ -10,8 +10,8 @@
  USERINFO   用户信息格式如下
  
  ### USERINFO
- email:接收邮件的邮箱,send:server酱send,rmblow:人民币低价提醒,rmbhigh:人民币高价提醒,usdtlow:USDT低价提醒,usdthigt:USDT高价提醒
- 如email:123456@qq.com,send:abcdef,rmblow:10,rmbhigh:0,usdtlow:0,usdthigt:1000
+ email:接收邮件的邮箱,send:server酱send,rmblow:人民币低价提醒,rmbhigh:人民币高价提醒,usdtlow:USDT低价提醒,usdthigt:USDT高价提醒,rpt:是否发送新债提醒
+ 如email:123456@qq.com,send:abcdef,rmblow:10,rmbhigh:0,usdtlow:0,usdthigt:1000,rpt:true
  邮箱和send可不填，价格提醒为0即为不提醒（但还是会推送价格信息）多个账号用|分隔
  
  
