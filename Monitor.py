@@ -41,7 +41,8 @@ def getValue(s: str, key: str):
 
 
 def ETH(argv):
-    url = "https://api.btc126.com/eth.php"
+    # url = "https://api.btc126.com/eth.php"
+    url = "https://eth.btc126.com/eth.php"
     dataArr = getJson(url)
     # keys=["BTER", "ZB", "MXC", "BITFINEX", "OKCOIN", "HUOBI", "BINANCE"]
     usdt = getBuy("USDT", dataArr)
