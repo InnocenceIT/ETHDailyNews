@@ -1,16 +1,17 @@
-# coding=utf-8
+# coding=gb2312
 import requests
 import json
+import datetime
+from datetime import date, timedelta
 from Util.EmailUtil import EmailUtil
 import sys
 
 
-def getJson():
-    url = "https://eth.btc126.com/eth.php"
+def getJson(url):
     response = requests.get(url)
     response.encoding = response.apparent_encoding
-    dataarr = json.loads(response.text)
-    return dataarr
+    data = json.loads(response.text)
+    return data
 
 
 def wxPush(text: str, desp: str, send: str):
@@ -39,8 +40,9 @@ def getValue(s: str, key: str):
     return ""
 
 
-def tixing(argv):
-    dataArr = getJson()
+def ETH(argv):
+    url = "https://api.btc126.com/eth.php"
+    dataArr = getJson(url)
     # keys=["BTER", "ZB", "MXC", "BITFINEX", "OKCOIN", "HUOBI", "BINANCE"]
     usdt = getBuy("USDT", dataArr)
     huoBi = getBuy("HUOBI", dataArr)
@@ -76,6 +78,46 @@ def tixing(argv):
         if len(send) > 0:
             reTest = wxPush(title, content, send)
             print(reTest)
+def zhaiquan(argv):
+    userInfoStr = argv[1]
+    from_addr = argv[2]  # 邮件发送账号
+    qqCode = argv[3]  # 授权码（这个要填自己获取到的）
+    url = "http://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=PUBLIC_START_DATE&sortTypes=-1&pageSize=20&pageNumber=1&reportName=RPT_BOND_CB_LIST&columns=ALL"
+    data = getJson(url)
+    dataArr = data["result"]["data"]
+    # print(dataArr)
+    userInfo = userInfoStr.split("|")
+    for user in userInfo:
+        email = getValue(user, "email")
+        send = getValue(user, "send")
+        rpt = getValue(user, "rpt")
+        if rpt == "true":
+            con = ""
+            for data in dataArr:
+                print(data["SECURITY_NAME_ABBR"],"\t",data["PUBLIC_START_DATE"],"\t",data["ACTUAL_ISSUE_SCALE"],"\t\t",data["RATING"])
+                public_start_date=datetime.datetime.strptime(data["PUBLIC_START_DATE"],"%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d")
+                tomorrow = (date.today() + timedelta(days=1)).strftime("%Y-%m-%d")
+                # tomorrow="2021-09-29"
+                if public_start_date==tomorrow:
+                    temp="名称：%s----规模：%s（亿元）-----评级：%s"%(data["SECURITY_NAME_ABBR"],data["ACTUAL_ISSUE_SCALE"],data["RATING"])
+                    con="%s%s"%(con,temp)
+                    # print(con)
+            if len(con)==0:
+                continue
+            content = "<span>%s</span>" % con
+            title = "明日有新债申购"
+            if len(email) > 0:
+                EmailUtil.sendEmail(email, title, content, from_addr, qqCode)
+            if len(send) > 0:
+                reTest = wxPush(title, content, send)
+                # print(reTest)
+            
+def tixing(argv):
+    ETH(argv)
+    zhaiquan(argv)
+    
+                
+
 
 
 tixing(sys.argv)
