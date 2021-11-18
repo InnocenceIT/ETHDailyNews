@@ -1,4 +1,4 @@
-# coding=gb2312
+# coding=gbk
 import requests
 import json
 import datetime
