@@ -114,7 +114,7 @@ def zhaiquan(argv):
                 # print(reTest)
             
 def tixing(argv):
-    ETH(argv)
+    # ETH(argv)
     zhaiquan(argv)
     
                
